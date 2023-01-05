@@ -2,9 +2,9 @@
 """ module for annotation work python"""
 
 
-def sum_list(liste: list[float]) -> float:
+def sum_list(input_list: list[float]) -> float:
     """
         function sum_list which takes a list input_list of
         floats as argument and returns their sum as a float.
     """
-    return (sum(liste))
+    return (sum(input_list))
