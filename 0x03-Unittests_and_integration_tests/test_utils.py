@@ -2,8 +2,9 @@
 """A github org client
 """
 import unittest
-from utils import access_nested_map
+from utils import access_nested_map, get_json
 from parameterized import parameterized
+from unittest.mock import Mock, patch
 
 
 class TestAccessNestedMap(unittest.TestCase):
@@ -22,3 +23,17 @@ class TestAccessNestedMap(unittest.TestCase):
     def test_access_nested_map_exception(self, nested_map, path, result):
         with self.assertRaises(KeyError) as e:
             self.assertEqual(access_nested_map(nested_map, path), e.exception)
+
+class TestGetJson(unittest.TestCase):
+    @parameterized.expand([
+            ["http://example.com", {"payload": True}],
+            ["http://holberton.io", {"payload": False}],
+        ])
+    def test_get_json(self, test_url, test_payload):
+        """method to test get_json method"""
+        mock_response = Mock()
+        mock_response.json.return_value = test_payload
+        with patch('requests.get', return_value=mock_response):
+            real_response = get_json(test_url)
+            self.assertEqual(real_response, test_payload)
+            mock_response.json.assert_called_once()
