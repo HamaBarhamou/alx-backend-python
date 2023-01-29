@@ -25,6 +25,7 @@ class TestAccessNestedMap(unittest.TestCase):
         with self.assertRaises(KeyError) as e:
             self.assertEqual(access_nested_map(nested_map, path), e.exception)
 
+
 class TestGetJson(unittest.TestCase):
     @parameterized.expand([
             ["http://example.com", {"payload": True}],
@@ -38,6 +39,7 @@ class TestGetJson(unittest.TestCase):
             real_response = get_json(test_url)
             self.assertEqual(real_response, test_payload)
             mock_response.json.assert_called_once()
+
 
 class TestMemoize(unittest.TestCase):
     """ Class for testing memoization """
